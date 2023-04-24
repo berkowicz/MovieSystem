@@ -116,7 +116,7 @@ namespace MovieSystem
                 var respons = new Models.UserGenre
                 {
                     UserId = userId,
-                    Id = genreId
+                    GenreId = genreId
                 };
                 await context.UserGenre.AddAsync(respons);
                 await context.SaveChangesAsync();
