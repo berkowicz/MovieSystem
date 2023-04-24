@@ -127,8 +127,8 @@ namespace MovieSystem
             app.MapGet("/Get/Recommendations/", async (DataContext context, string genreTitle) =>
             {
                 var genre = await context.Genre.FirstOrDefaultAsync(g => g.Title == genreTitle);
-                //Add your own api key from The Movie DataBase below
-                var apiKey = "c57f1aec22d6876dc6f561c84046225c";
+
+                var apiKey = "INSERT YOU API KEY HERE";
                 var url = $"https://api.themoviedb.org/3/discover/movie?api_key={apiKey}&sort_by=popularity.desc&include_adult=true&include_video=false&with_genres={genre.Id}&with_watch_monetization_types=free";
 
                 var client = new HttpClient();
@@ -138,7 +138,6 @@ namespace MovieSystem
 
                 var content = await response.Content.ReadAsStringAsync();
 
-                //This returns the raw dataas json , easier to read
                 return Results.Content(content, contentType: "application/json");
             });
 
