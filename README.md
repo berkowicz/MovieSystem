@@ -1,7 +1,7 @@
 # MovieSystem
 This is a program built with ASP.NET CORE Web API that uses both my own API and an external API. <br>
 Its build using Code first programming with Entityframwork. The external api i connected to TMDB. <br>
-<a href="https://www.themoviedb.org/"><img src="https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg" width="100px;" alt="TMDB"/>
+<a href="https://www.themoviedb.org/" target="_blank"><img src="https://pbs.twimg.com/profile_images/1243623122089041920/gVZIvphd_400x400.jpg" width="100px;" alt="TMDB"/>
 
 ## The Code
 |**Models**|**Description**|
