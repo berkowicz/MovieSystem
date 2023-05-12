@@ -15,7 +15,10 @@ namespace MovieSystem
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+            }));
 
             builder.Services.AddDbContext<DataContext>(options =>
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -30,6 +33,7 @@ namespace MovieSystem
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("corsapp");
             app.UseAuthorization();
 
 
@@ -87,7 +91,7 @@ namespace MovieSystem
             //Add/Update rating with userId and movie
             app.MapPost("/Post/AddRating/", async (DataContext context, int userId, int rating, string movie) =>
             {
-                var updateRows = await context.UserGenre.Where(x => x.GenreId == userId).Where(x => x.Movie == movie)
+                var updateRows = await context.UserGenre.Where(x => x.UserId == userId).Where(x => x.Movie == movie)
                 .ExecuteUpdateAsync(updates =>
                 updates.SetProperty(x => x.Rating, rating));
 
@@ -128,7 +132,7 @@ namespace MovieSystem
             {
                 var genre = await context.Genre.FirstOrDefaultAsync(g => g.Title == genreTitle);
 
-                var apiKey = "INSERT YOU API KEY HERE";
+                var apiKey = "c57f1aec22d6876dc6f561c84046225c";
                 var url = $"https://api.themoviedb.org/3/discover/movie?api_key={apiKey}&sort_by=popularity.desc&include_adult=true&include_video=false&with_genres={genre.Id}&with_watch_monetization_types=free";
 
                 var client = new HttpClient();
